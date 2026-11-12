@@ -113,37 +113,6 @@ em { font-style: italic; }
 .bg-plum { background: var(--plum); color: var(--ivory); }
 .bg-plum h2, .bg-plum h3 { color: var(--ivory); }
 
-/* ---------- Transições suaves entre seções ----------
-   .fade-top: mescla a cor da seção anterior (--fade-from) no topo.
-   .fade-bottom: mescla a cor da próxima seção (--fade-to) na base.
-   A faixa ocupa só o respiro interno da seção, sem cobrir conteúdo. */
-.fade-top, .fade-bottom { position: relative; isolation: isolate; }
-.fade-top::before, .fade-bottom::after {
-  content: ''; position: absolute; left: 0; right: 0; z-index: -1; pointer-events: none;
-  height: var(--fade-h, clamp(4rem, 9vw, 8rem));
-}
-.fade-top::before {
-  top: 0;
-  background: linear-gradient(to bottom, var(--fade-from), transparent);
-  background: linear-gradient(to bottom,
-    var(--fade-from) 0%,
-    color-mix(in oklab, var(--fade-from) 72%, transparent) 22%,
-    color-mix(in oklab, var(--fade-from) 40%, transparent) 50%,
-    color-mix(in oklab, var(--fade-from) 14%, transparent) 78%,
-    transparent 100%);
-}
-.fade-bottom::after {
-  bottom: 0;
-  background: linear-gradient(to top, var(--fade-to), transparent);
-  background: linear-gradient(to top,
-    var(--fade-to) 0%,
-    color-mix(in oklab, var(--fade-to) 72%, transparent) 22%,
-    color-mix(in oklab, var(--fade-to) 40%, transparent) 50%,
-    color-mix(in oklab, var(--fade-to) 14%, transparent) 78%,
-    transparent 100%);
-}
-.fade-tall { --fade-h: clamp(4.5rem, 10vw, 9rem); }
-
 /* ---------- Tipografia utilitária ---------- */
 
 .eyebrow {
