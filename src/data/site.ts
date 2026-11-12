@@ -11,7 +11,7 @@ export const site = {
   title: 'Nutricionista',
   tagline: 'Nutrição de Precisão e Saúde',
   crn: 'CRN 24244/P',
-  location: 'Lago Sul — Brasília, DF',
+  location: 'Lago Sul, Brasília (DF)',
   locality: 'Brasília',
   neighborhood: 'Lago Sul',
   region: 'DF',
