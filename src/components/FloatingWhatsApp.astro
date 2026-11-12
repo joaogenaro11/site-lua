@@ -1,0 +1,44 @@
+---
+import WhatsIcon from './WhatsIcon.astro';
+import { site } from '../data/site';
+---
+<a class="float-wa" href={site.whatsappUrl} target="_blank" rel="noopener" data-float-wa data-cta="flutuante">
+  <WhatsIcon size={22} />
+  <span class="float-wa__label">Agendar pelo WhatsApp</span>
+</a>
+
+<style>
+  .float-wa {
+    position: fixed; right: max(1rem, env(safe-area-inset-right)); bottom: max(1rem, env(safe-area-inset-bottom)); z-index: 40;
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    height: 3.4rem; padding: 0 1.3rem 0 1.1rem; border-radius: 999px;
+    background: var(--plum); color: var(--ivory); text-decoration: none;
+    font-size: 0.9rem; font-weight: 550;
+    box-shadow: 0 10px 30px -12px rgba(37, 35, 42, 0.45);
+    opacity: 0; transform: translateY(14px); pointer-events: none;
+    transition: opacity 0.5s var(--ease), transform 0.6s var(--ease-out), background-color 0.3s var(--ease);
+  }
+  .float-wa.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+  .float-wa:hover { background: var(--plum-deep); }
+  .float-wa svg { color: var(--chartreuse); }
+  @media (min-width: 961px) {
+    .float-wa { width: 3.4rem; padding: 0; justify-content: center; }
+    .float-wa__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  }
+  /* Sem JS: botão sempre visível */
+  :global(html:not(.js)) .float-wa { opacity: 1; transform: none; pointer-events: auto; }
+</style>
+
+<script>
+  const btn = document.querySelector<HTMLElement>('[data-float-wa]');
+  const hero = document.querySelector('[data-hero]');
+  const finalCta = document.querySelector('[data-final-cta]');
+  if (btn) {
+    let pastHero = !hero;
+    let atFinal = false;
+    const update = () => btn.classList.toggle('is-visible', pastHero && !atFinal);
+    if (hero) new IntersectionObserver(([e]) => { pastHero = !e.isIntersecting; update(); }, { threshold: 0.15 }).observe(hero);
+    if (finalCta) new IntersectionObserver(([e]) => { atFinal = e.isIntersecting; update(); }, { threshold: 0.25 }).observe(finalCta);
+    update();
+  }
+</script>
