@@ -1,0 +1,27 @@
+---
+// Monograma oficial (extraído do Case de Branding, slide 05/07).
+// Geometria preservada: anel aberto (G), L geométrico e ponto chartreuse.
+interface Props {
+  tone?: 'plum' | 'ivory';
+  size?: number;
+  class?: string;
+  label?: string;
+}
+const { tone = 'plum', size = 44, class: className, label } = Astro.props;
+const stroke = tone === 'plum' ? '#512D6D' : '#F7F5F0';
+---
+<svg
+  class={className}
+  viewBox="0 0 120 120"
+  width={size}
+  height={size}
+  fill="none"
+  role={label ? 'img' : undefined}
+  aria-label={label}
+  aria-hidden={label ? undefined : 'true'}
+  focusable="false"
+>
+  <circle cx="60" cy="60" r="45" stroke={stroke} stroke-width="3" stroke-dasharray="255 28" stroke-linecap="round" transform="rotate(58 60 60)"></circle>
+  <path d="M48 38 V78 H74" stroke={stroke} stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+  <circle cx="74" cy="78" r="4.6" fill="#B4D936"></circle>
+</svg>

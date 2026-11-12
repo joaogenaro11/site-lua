@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+const updated = '12 de novembro de 2026';
+---
+<Base
+  title="Política de Privacidade | Luana Genaro — Nutricionista"
+  description="Como o site de Luana Genaro trata dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (LGPD)."
+  path="/politica-de-privacidade"
+>
+  <article class="legal container">
+    <p class="eyebrow">Transparência</p>
+    <h1 class="h2">Política de Privacidade</h1>
+    <p class="muted legal__date">Última atualização: {updated}</p>
+
+    <h2>1. Quem somos</h2>
+    <p>Este site apresenta o trabalho de {site.name}, nutricionista ({site.crn}), com consultório no {site.location}. Neste documento, explicamos de forma simples como os dados pessoais são tratados, conforme a Lei nº 13.709/2018 (Lei Geral de Proteção de Dados — LGPD).</p>
+
+    <h2>2. Dados coletados por este site</h2>
+    <p>Este site não possui formulários, não exige cadastro e não utiliza cookies de rastreamento, ferramentas de análise de audiência ou pixels de publicidade.</p>
+    <p>Como acontece com qualquer site na internet, o serviço de hospedagem pode registrar dados técnicos de acesso (como endereço IP, data e horário da visita e tipo de navegador) para fins de segurança e funcionamento. Esses registros são mantidos pelo provedor de hospedagem conforme suas próprias políticas.</p>
+    <p>As fontes tipográficas e as imagens são servidas a partir do próprio site, sem envio de dados a serviços de terceiros durante a navegação.</p>
+
+    <h2>3. Contato pelo WhatsApp e pelo Instagram</h2>
+    <p>Ao clicar em um botão de agendamento, você é direcionado ao WhatsApp, serviço operado pela Meta. As informações que você decidir compartilhar na conversa (como nome, telefone e dados sobre sua saúde) são utilizadas exclusivamente para responder ao seu contato, organizar o agendamento e prestar o atendimento nutricional.</p>
+    <p>Dados de saúde são considerados dados pessoais sensíveis pela LGPD e são tratados com sigilo, de acordo com o Código de Ética e de Conduta do Nutricionista. O uso do WhatsApp e do Instagram também está sujeito às políticas de privacidade desses serviços.</p>
+
+    <h2>4. Compartilhamento</h2>
+    <p>Seus dados não são vendidos nem compartilhados para fins comerciais. Eles só podem ser compartilhados quando houver obrigação legal ou mediante sua autorização.</p>
+
+    <h2>5. Seus direitos</h2>
+    <p>Você pode, a qualquer momento, solicitar confirmação da existência de tratamento, acesso, correção, anonimização, portabilidade ou eliminação dos seus dados, além de informações sobre compartilhamento e revogação de consentimento, nos termos do art. 18 da LGPD.</p>
+
+    <h2>6. Como entrar em contato</h2>
+    <p>Para exercer seus direitos ou esclarecer dúvidas sobre esta política, entre em contato pelo <a href={site.whatsappUrl} target="_blank" rel="noopener">WhatsApp {site.phoneDisplay}</a>.</p>
+
+    <h2>7. Atualizações</h2>
+    <p>Esta política pode ser atualizada caso novas funcionalidades sejam adicionadas ao site. A data da última atualização estará sempre indicada no topo desta página.</p>
+
+    <p class="legal__back"><a class="link-arrow" href="/">← Voltar para a página inicial</a></p>
+  </article>
+</Base>
+
+<style>
+  .legal { max-width: calc(46rem + var(--gutter) * 2); padding-top: calc(var(--header-h) + clamp(3rem, 7vw, 6rem)); padding-bottom: var(--section-y); }
+  .legal .h2 { margin-top: 1.4rem; }
+  .legal__date { margin-top: 1rem; font-size: 0.95rem; }
+  .legal h2:not(.h2) { font-size: 1.5rem; margin: 2.75rem 0 0.9rem; font-variation-settings: 'opsz' 30; }
+  .legal p + p { margin-top: 0.9rem; }
+  .legal p { color: var(--text-soft); }
+  .legal p a { color: var(--plum); }
+  .legal__back { margin-top: 3.5rem; }
+</style>

@@ -1,0 +1,759 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Arc from '../components/Arc.astro';
+import ArrowIcon from '../components/ArrowIcon.astro';
+import WhatsIcon from '../components/WhatsIcon.astro';
+import { site } from '../data/site';
+import { faq } from '../data/faq';
+
+import fotoHero from '../assets/fotos/luana-genaro-retrato-roxo.jpg';
+import fotoCozinha from '../assets/fotos/luana-genaro-cozinha.jpg';
+import fotoConsulta from '../assets/fotos/luana-genaro-consulta-cha.jpg';
+import fotoJaleco from '../assets/fotos/luana-genaro-jaleco.jpg';
+import fotoAcolhimento from '../assets/fotos/luana-genaro-escritorio.jpg';
+
+const title = 'Luana Genaro | Nutricionista em Brasília — Nutrição de Precisão e Saúde';
+const description =
+  'Nutricionista no Lago Sul, Brasília (DF). Nutrição de precisão com avaliação individualizada, atenção à saúde da mulher e à menopausa, composição corporal, saúde intestinal e metabólica.';
+
+const situacoes = [
+  'Dificuldade em melhorar a composição corporal, mesmo com esforço.',
+  'Mudanças no corpo e no bem-estar durante a perimenopausa e a menopausa.',
+  'Cansaço frequente e alterações na qualidade do sono.',
+  'Desconfortos intestinais que se repetem.',
+  'Frustração com dietas e orientações genéricas, que não consideram você.',
+];
+
+const areas = [
+  {
+    t: 'Saúde da mulher e menopausa',
+    d: 'Cuidado nutricional para as mudanças da perimenopausa, da menopausa e da pós-menopausa, com atenção aos sintomas, à composição corporal e à qualidade de vida.',
+  },
+  {
+    t: 'Emagrecimento e composição corporal',
+    d: 'Estratégias para melhorar a composição corporal de forma consistente, respeitando seu metabolismo, sua rotina e sua saúde.',
+  },
+  {
+    t: 'Saúde intestinal e microbiota',
+    d: 'O funcionamento intestinal e os desconfortos digestivos tratados como parte central — e não secundária — do cuidado nutricional.',
+  },
+  {
+    t: 'Saúde metabólica',
+    d: 'Leitura contextualizada de exames, sintomas e hábitos para orientar escolhas alimentares que apoiem o equilíbrio do organismo.',
+  },
+  {
+    t: 'Vitalidade e longevidade',
+    d: 'Alimentação como aliada da energia, do sono e de um envelhecimento saudável, com foco em prevenção e bem-estar a longo prazo.',
+  },
+];
+
+const etapas = [
+  {
+    n: '01',
+    t: 'Conhecer',
+    d: 'Escuta atenta do seu histórico clínico, da rotina, da alimentação, dos sintomas e dos seus objetivos.',
+  },
+  {
+    n: '02',
+    t: 'Personalizar',
+    d: 'Construção de uma estratégia alimentar adequada às suas necessidades e ao contexto da sua vida.',
+  },
+  {
+    n: '03',
+    t: 'Acompanhar',
+    d: 'Avaliação da evolução, ajustes ao longo do caminho e desenvolvimento de hábitos sustentáveis.',
+  },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${site.url}/#website`,
+      url: `${site.url}/`,
+      name: 'Luana Genaro — Nutrição de Precisão e Saúde',
+      inLanguage: 'pt-BR',
+    },
+    {
+      '@type': 'Person',
+      '@id': `${site.url}/#luana`,
+      name: site.name,
+      jobTitle: 'Nutricionista',
+      description:
+        'Nutricionista com atuação em nutrição de precisão e saúde, com foco na saúde da mulher acima dos 40 anos.',
+      image: `${site.url}/og-image.jpg`,
+      url: `${site.url}/`,
+      sameAs: [site.instagramUrl],
+      hasCredential: {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'Registro profissional',
+        name: site.crn,
+      },
+      worksFor: { '@id': `${site.url}/#consultorio` },
+    },
+    {
+      '@type': 'MedicalBusiness',
+      '@id': `${site.url}/#consultorio`,
+      name: 'Luana Genaro — Nutrição de Precisão e Saúde',
+      url: `${site.url}/`,
+      image: `${site.url}/og-image.jpg`,
+      logo: `${site.url}/icon-512.png`,
+      telephone: site.phoneE164,
+      medicalSpecialty: 'DietNutrition',
+      description,
+      founder: { '@id': `${site.url}/#luana` },
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Brasília',
+        addressRegion: 'DF',
+        addressCountry: 'BR',
+      },
+      areaServed: [
+        { '@type': 'Place', name: 'Lago Sul, Brasília - DF' },
+        { '@type': 'City', name: 'Brasília' },
+      ],
+      knowsAbout: [
+        'Nutrição de precisão',
+        'Saúde da mulher',
+        'Menopausa',
+        'Composição corporal',
+        'Saúde intestinal',
+        'Saúde metabólica',
+        'Longevidade',
+        'Fitoterapia',
+      ],
+      sameAs: [site.instagramUrl],
+    },
+    {
+      '@type': 'FAQPage',
+      '@id': `${site.url}/#faq`,
+      mainEntity: faq.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
+    },
+  ],
+};
+---
+
+<Base title={title} description={description} path="/" home jsonLd={jsonLd}>
+  <!-- ============ 1. HERO ============ -->
+  <section class="hero" data-hero aria-labelledby="hero-title">
+    <div class="hero__text">
+      <p class="eyebrow hero__eyebrow">Nutricionista · Lago Sul, Brasília</p>
+      <h1 id="hero-title" class="display hero__title">
+        Sua saúde merece um olhar <em class="serif-italic">único.</em>
+      </h1>
+      <p class="lead hero__lead">
+        Ciência, escuta e cuidado nutricional individualizado para compreender seu organismo e construir
+        estratégias que façam sentido para você.
+      </p>
+      <div class="hero__actions">
+        <a class="btn" href={site.whatsappUrl} target="_blank" rel="noopener" data-cta="hero">
+          Agendar minha consulta <ArrowIcon class="arrow" />
+        </a>
+        <a class="link-arrow" href="#abordagem">Conheça minha abordagem <ArrowIcon /></a>
+      </div>
+      <p class="hero__sign">
+        <span class="hero__sign-name">Luana Genaro</span>
+        <span class="hero__sign-rule" aria-hidden="true"></span>
+        <span>Nutrição de Precisão e Saúde</span>
+      </p>
+    </div>
+
+    <div class="hero__media">
+      <div class="photo hero__photo hero-in">
+        <Picture
+          src={fotoHero}
+          alt="Luana Genaro, nutricionista, sorrindo, sentada em uma poltrona de couro, com vestido roxo."
+          formats={['webp']}
+          widths={[480, 720, 960, 1333]}
+          sizes="(max-width: 900px) 100vw, 50vw"
+          quality={74}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+      <Arc class="hero__arc" />
+    </div>
+  </section>
+
+  <!-- ============ 2. IDENTIFICAÇÃO ============ -->
+  <section class="section ident" id="identificacao" aria-labelledby="ident-title">
+    <div class="container ident__grid">
+      <div class="ident__head">
+        <p class="eyebrow" data-reveal>Quando algo muda</p>
+        <h2 id="ident-title" class="h2" data-reveal style="--d:80ms">
+          Seu corpo muda. Seu cuidado também <em class="serif-italic">precisa evoluir.</em>
+        </h2>
+      </div>
+      <div class="ident__body">
+        <p class="lead" data-reveal>
+          Ao longo da vida, alterações no metabolismo, na composição corporal, na energia, no sono e no
+          funcionamento intestinal podem pedir uma avaliação mais individualizada — e não mais uma regra
+          genérica.
+        </p>
+        <ul class="ident__list" aria-label="Situações comuns">
+          {situacoes.map((s, i) => (
+            <li data-reveal style={`--d:${i * 60}ms`}>
+              <span class="ident__index" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+              <span>{s}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="ident__close" data-reveal>
+          Cada um desses sinais pode ter origens diferentes. Por isso, o ponto de partida é sempre compreender
+          o seu contexto.
+        </p>
+        <a class="link-arrow" href="#abordagem" data-reveal>Veja como funciona a abordagem <ArrowIcon /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. ÁREAS DE ATUAÇÃO ============ -->
+  <section class="section bg-ivory areas" id="especialidades" aria-labelledby="areas-title">
+    <div class="container">
+      <header class="areas__head">
+        <p class="eyebrow" data-reveal>Áreas de atuação</p>
+        <h2 id="areas-title" class="h2" data-reveal style="--d:80ms">
+          Um cuidado que considera você <em class="serif-italic">por inteiro.</em>
+        </h2>
+      </header>
+
+      <div class="areas__grid">
+        <figure class="areas__figure">
+          <div class="photo areas__photo" data-reveal="photo">
+            <Picture
+              src={fotoCozinha}
+              alt="Luana Genaro sorrindo em uma cozinha clara, segurando um morango, com uma tigela de morangos sobre a bancada."
+              formats={['webp']}
+              widths={[420, 640, 900]}
+              sizes="(max-width: 900px) 100vw, 40vw"
+              quality={72}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+          <figcaption class="areas__caption">Nutrição que cabe na vida real.</figcaption>
+        </figure>
+
+        <div class="areas__content">
+          <ol class="areas__list">
+            {areas.map((a, i) => (
+              <li class="areas__item" data-reveal>
+                <span class="areas__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <div>
+                  <h3 class="h3">{a.t}</h3>
+                  <p class="muted">{a.d}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div class="areas__complement" data-reveal>
+            <p class="areas__complement-label">Complementar à estratégia</p>
+            <p>
+              <strong>Fitoterapia e suplementação individualizada.</strong> Quando indicadas, entram como parte
+              criteriosa do plano nutricional — sempre a partir da avaliação, nunca como receita pronta.
+            </p>
+          </div>
+
+          <div class="areas__cta" data-reveal>
+            <a class="btn" href={site.whatsappUrl} target="_blank" rel="noopener" data-cta="especialidades">
+              Agendar minha consulta <ArrowIcon class="arrow" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. MÉTODO ============ -->
+  <section class="section bg-plum method" id="abordagem" aria-labelledby="method-title">
+    <Arc class="method__arc" tone="ivory" />
+    <div class="container">
+      <div class="method__top">
+        <div class="method__head">
+          <p class="eyebrow" data-reveal>A abordagem</p>
+          <h2 id="method-title" class="h2" data-reveal style="--d:80ms">
+            Antes de propor um caminho, é preciso <em class="serif-italic">compreender você.</em>
+          </h2>
+          <p class="lead" data-reveal style="--d:160ms">
+            Nada de dieta pronta ou fórmula genérica. Cada estratégia nasce de uma leitura cuidadosa do seu
+            organismo, dos seus hábitos e do seu momento de vida.
+          </p>
+        </div>
+        <div class="photo method__photo" data-reveal="photo">
+          <Picture
+            src={fotoConsulta}
+            alt="Luana Genaro conversando e sorrindo com uma paciente durante a consulta, com xícaras de chá sobre a mesa."
+            formats={['webp']}
+            widths={[420, 640, 900]}
+            sizes="(max-width: 900px) 100vw, 42vw"
+            quality={72}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+
+      <ol class="method__steps">
+        {etapas.map((e, i) => (
+          <li class="method__step" data-reveal style={`--d:${i * 100}ms`}>
+            <span class="method__num" aria-hidden="true">{e.n}</span>
+            <h3 class="h3">{e.t}</h3>
+            <p>{e.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 5. SOBRE ============ -->
+  <section class="section about" id="sobre" aria-labelledby="about-title">
+    <div class="container about__grid">
+      <div class="about__media">
+        <div class="photo about__photo" data-reveal="photo">
+          <Picture
+            src={fotoJaleco}
+            alt="Retrato de Luana Genaro de jaleco branco com o bordado “Dra. Luana Genaro, Nutricionista”, braços cruzados e sorriso."
+            formats={['webp']}
+            widths={[420, 640, 900, 1200]}
+            sizes="(max-width: 900px) 100vw, 40vw"
+            quality={74}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+
+      <div class="about__content">
+        <p class="eyebrow" data-reveal>Sobre Luana Genaro</p>
+        <h2 id="about-title" class="h2" data-reveal style="--d:80ms">
+          Ciência, sensibilidade e <em class="serif-italic">precisão</em> em cada decisão.
+        </h2>
+        <div class="about__text" data-reveal style="--d:140ms">
+          <p class="lead">
+            Luana Genaro é nutricionista e atua com nutrição de precisão: uma prática baseada em ciência, que
+            parte da avaliação individualizada para construir estratégias alimentares coerentes com cada
+            organismo.
+          </p>
+          <p>
+            Em seu trabalho, integra conhecimento científico, avaliação nutricional, contexto metabólico e uma
+            escuta atenta — porque sintomas, exames e hábitos só fazem sentido quando lidos em conjunto. O
+            resultado é um cuidado próximo, claro e construído para a sua realidade.
+          </p>
+        </div>
+
+        <dl class="about__facts" data-reveal>
+          <div>
+            <dt>Formação</dt>
+            <dd>{site.education}</dd>
+          </div>
+          <div>
+            <dt>Registro</dt>
+            <dd>Nutricionista · {site.crn}</dd>
+          </div>
+          <div>
+            <dt>Consultório</dt>
+            <dd>{site.location}</dd>
+          </div>
+        </dl>
+
+        <div class="about__actions" data-reveal>
+          <a class="btn" href={site.whatsappUrl} target="_blank" rel="noopener" data-cta="sobre">
+            Agendar minha consulta <ArrowIcon class="arrow" />
+          </a>
+          <a class="link-arrow" href="#atendimento">Formas de atendimento <ArrowIcon /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. FORMAS DE ATENDIMENTO ============ -->
+  <section class="section bg-ivory care" id="atendimento" aria-labelledby="care-title">
+    <div class="container">
+      <header class="care__head">
+        <p class="eyebrow" data-reveal>Atendimento</p>
+        <h2 id="care-title" class="h2" data-reveal style="--d:80ms">
+          Um acompanhamento pensado para a <em class="serif-italic">sua realidade.</em>
+        </h2>
+      </header>
+
+      <div class="care__grid">
+        <article class="care__item" data-reveal>
+          <span class="care__num" aria-hidden="true">01</span>
+          <h3 class="h3">Consulta nutricional individual</h3>
+          <p class="muted">Avaliação e planejamento nutricional personalizado.</p>
+          <ul class="care__list">
+            <li>Avaliação detalhada de histórico, rotina, sintomas e exames</li>
+            <li>Planejamento alimentar individualizado</li>
+            <li>Estratégia nutricional adequada à sua rotina</li>
+          </ul>
+        </article>
+
+        <article class="care__item" data-reveal style="--d:100ms">
+          <span class="care__num" aria-hidden="true">02</span>
+          <h3 class="h3">Programa de acompanhamento</h3>
+          <p class="muted">
+            Cuidado continuado, com consultas periódicas, reavaliações e recursos de suporte conforme o programa
+            contratado.
+          </p>
+          <ul class="care__list">
+            <li>Acompanhamento próximo da sua evolução clínica</li>
+            <li>Ajustes da estratégia ao longo do caminho</li>
+            <li>Check-ins e suporte por WhatsApp, nos programas que incluem esses recursos</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="care__foot" data-reveal>
+        <p class="muted">
+          Quando clinicamente indicados, exames complementares podem ser solicitados. Valores e detalhes de cada
+          modalidade são informados pelo WhatsApp.
+        </p>
+        <a class="btn" href={site.whatsappUrl} target="_blank" rel="noopener" data-cta="atendimento">
+          <WhatsIcon size={18} /> Solicitar informações
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. ACOLHIMENTO ============ -->
+  <section class="welcome" aria-labelledby="welcome-title">
+    <div class="welcome__media">
+      <div class="photo welcome__photo" data-reveal="fade">
+        <Picture
+          src={fotoAcolhimento}
+          alt="Luana Genaro sorrindo, sentada à mesa diante de um notebook, em ambiente acolhedor."
+          formats={['webp']}
+          widths={[480, 720, 960, 1333]}
+          sizes="(max-width: 900px) 100vw, 50vw"
+          quality={72}
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
+    <div class="welcome__content">
+      <p class="eyebrow" data-reveal>Acolhimento</p>
+      <h2 id="welcome-title" class="h2" data-reveal style="--d:80ms">
+        Cuidar da saúde também é <em class="serif-italic">sentir-se compreendida.</em>
+      </h2>
+      <div class="welcome__text" data-reveal style="--d:160ms">
+        <p>
+          Cada orientação começa pela escuta. O objetivo não é impor regras rígidas, mas construir autonomia:
+          escolhas que respeitam a sua rotina, a sua história e o seu momento de vida.
+        </p>
+        <p>Um cuidado que não se resume ao peso — e que acompanha você de perto, em cada etapa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8. FAQ ============ -->
+  <section class="section bg-ivory faq" id="duvidas" aria-labelledby="faq-title">
+    <div class="container faq__grid">
+      <header class="faq__head">
+        <p class="eyebrow" data-reveal>Dúvidas frequentes</p>
+        <h2 id="faq-title" class="h2" data-reveal style="--d:80ms">Antes da sua <em class="serif-italic">primeira consulta.</em></h2>
+        <p class="muted faq__aside" data-reveal style="--d:140ms">
+          Não encontrou sua pergunta? <a href={site.whatsappUrl} target="_blank" rel="noopener" data-cta="faq">Fale pelo WhatsApp.</a>
+        </p>
+      </header>
+      <div class="faq__list" data-reveal>
+        {faq.map((f, i) => (
+          <details class="faq__item" name="faq" open={i === 0}>
+            <summary>
+              <span>{f.q}</span>
+              <span class="faq__icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq__answer"><p>{f.a}</p></div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 9. CONTATO / CTA FINAL ============ -->
+  <section class="section bg-plum final" id="contato" data-final-cta aria-labelledby="final-title">
+    <Arc class="final__arc" tone="ivory" />
+    <div class="container final__inner">
+      <p class="eyebrow" data-reveal>Agendamento</p>
+      <h2 id="final-title" class="display final__title" data-reveal style="--d:80ms">
+        Seu próximo passo pode começar com uma <em class="serif-italic">conversa.</em>
+      </h2>
+      <p class="lead final__lead" data-reveal style="--d:160ms">
+        Agende sua avaliação nutricional e conheça uma abordagem construída a partir das suas necessidades.
+      </p>
+      <div data-reveal style="--d:220ms">
+        <a class="btn btn--light final__btn" href={site.whatsappUrl} target="_blank" rel="noopener" data-cta="final">
+          <WhatsIcon size={20} /> Conversar pelo WhatsApp
+        </a>
+      </div>
+      <ul class="final__info" data-reveal style="--d:280ms">
+        <li><span>Consultório</span>{site.location}</li>
+        <li><span>Instagram</span><a href={site.instagramUrl} target="_blank" rel="noopener">{site.instagramHandle}</a></li>
+        <li><span>WhatsApp</span><a href={site.whatsappUrl} target="_blank" rel="noopener" data-cta="final-numero">{site.phoneDisplay}</a></li>
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---------- 1. Hero ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    min-height: min(100svh, 62rem);
+    background: var(--ivory);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero__text {
+    align-self: center;
+    padding: calc(var(--header-h) + clamp(2rem, 5vw, 4rem)) clamp(2rem, 5vw, 5rem) clamp(3rem, 6vw, 5rem)
+      max(var(--gutter), calc((100vw - var(--max)) / 2));
+    position: relative;
+    z-index: 2;
+  }
+  .hero__title { margin-top: 1.6rem; max-width: 10.5em; }
+  .hero__title em { color: var(--plum-mid); }
+  .hero__lead { margin-top: 1.75rem; max-width: 30em; }
+  .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2rem; margin-top: 2.5rem; }
+  .hero__sign {
+    display: flex; align-items: center; gap: 1rem; margin-top: clamp(3rem, 6vw, 4.5rem);
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--plum-mid);
+  }
+  .hero__sign-name { font-family: var(--serif); font-size: 1.05rem; letter-spacing: 0.01em; text-transform: none; font-weight: 400; color: var(--plum); }
+  .hero__sign-rule { width: 2.5rem; height: 1px; background: var(--line-strong); }
+  .hero__media { position: relative; min-height: 100%; }
+  .hero-in { animation: hero-in 1.4s var(--ease-out) both; }
+  @keyframes hero-in { from { clip-path: inset(0 0 0 8%); } to { clip-path: inset(0 0 0 0); } }
+  .hero__photo { position: absolute; inset: var(--header-h) 0 0 0; }
+  .hero__photo :global(img) { object-position: 52% 30%; }
+  :global(.hero__arc) {
+    position: absolute; width: clamp(15rem, 20vw, 20rem); height: auto; left: 0; bottom: 0;
+    transform: translate(-50%, 42%); z-index: 3; pointer-events: none;
+  }
+
+  /* ---------- 2. Identificação ---------- */
+  .ident__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2rem; }
+  .ident__head { grid-column: 1 / span 5; }
+  .ident__head .h2 { margin-top: 1.4rem; }
+  .ident__head em { color: var(--plum-mid); }
+  .ident__body { grid-column: 7 / span 6; padding-top: 0.5rem; }
+  .ident__list { margin-top: 2.5rem; border-top: 1px solid var(--line); }
+  .ident__list li {
+    display: grid; grid-template-columns: 3rem 1fr; gap: 0.5rem; align-items: baseline;
+    padding: 1.15rem 0; border-bottom: 1px solid var(--line); font-size: 1.05rem;
+  }
+  .ident__index { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; color: var(--plum-mid); font-variant-numeric: tabular-nums; }
+  .ident__close {
+    margin-top: 2.5rem; margin-bottom: 1.25rem; font-family: var(--serif); font-style: italic; font-weight: 340;
+    font-size: clamp(1.3rem, 1.9vw, 1.6rem); line-height: 1.4; color: var(--plum); max-width: 26em;
+  }
+
+  /* ---------- 3. Áreas ---------- */
+  .areas__head { max-width: 46rem; }
+  .areas__head .h2 { margin-top: 1.4rem; }
+  .areas__head em { color: var(--plum-mid); }
+  .areas__grid {
+    display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2rem; margin-top: clamp(3rem, 6vw, 5rem);
+    align-items: start;
+  }
+  .areas__figure { grid-column: 1 / span 5; margin: 0; position: sticky; top: calc(var(--header-h) + 2rem); }
+  .areas__photo { aspect-ratio: 4 / 5; }
+  .areas__photo :global(img) { object-position: 62% 40%; }
+  .areas__caption { margin-top: 1rem; font-family: var(--serif); font-style: italic; color: var(--text-soft); font-size: 1.05rem; }
+  .areas__content { grid-column: 7 / span 6; }
+  .areas__list { border-top: 1px solid var(--line-strong); }
+  .areas__item {
+    display: grid; grid-template-columns: 3.5rem 1fr; gap: 0.75rem; padding: 2rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .areas__item .h3 { margin-bottom: 0.6rem; }
+  .areas__num { font-family: var(--serif); font-size: 1rem; color: var(--plum-mid); padding-top: 0.45rem; font-variant-numeric: tabular-nums; }
+  .areas__complement {
+    margin-top: 2.5rem; padding: 1.75rem 0 0 1.5rem; border-left: 1px solid var(--sage); padding-top: 0;
+  }
+  .areas__complement-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--plum-mid); margin-bottom: 0.6rem; }
+  .areas__complement strong { font-weight: 600; color: var(--plum); }
+  .areas__cta { margin-top: 3rem; }
+
+  /* ---------- 4. Método ---------- */
+  .method { overflow: hidden; }
+  :global(.method__arc) { position: absolute; width: clamp(22rem, 40vw, 38rem); right: -10rem; top: -8rem; opacity: 0.35; pointer-events: none; }
+  .method__top { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2rem; align-items: end; position: relative; }
+  .method__head { grid-column: 1 / span 6; padding-bottom: 1rem; }
+  .method__head .h2 { margin-top: 1.4rem; }
+  .method__head em { color: var(--sage); }
+  .method__head .lead { margin-top: 1.75rem; }
+  .method__photo { grid-column: 8 / span 5; aspect-ratio: 4 / 5; }
+  .method__photo :global(img) { object-position: 45% 30%; }
+  .method__steps {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(2rem, 4vw, 4rem);
+    margin-top: clamp(4rem, 8vw, 6.5rem); counter-reset: step;
+  }
+  .method__step { border-top: 1px solid rgba(247, 245, 240, 0.25); padding-top: 1.75rem; position: relative; }
+  .method__step::before {
+    content: ''; position: absolute; top: -4px; left: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--chartreuse);
+  }
+  .method__num {
+    display: block; font-family: var(--serif); font-style: italic; font-size: clamp(2.6rem, 4vw, 3.6rem); line-height: 1;
+    color: rgba(247, 245, 240, 0.35); font-weight: 300; margin-bottom: 1.4rem;
+  }
+  .method__step .h3 { margin-bottom: 0.75rem; }
+  .method__step p { color: rgba(247, 245, 240, 0.8); max-width: 22em; }
+
+  /* ---------- 5. Sobre ---------- */
+  .about__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2rem; align-items: center; }
+  .about__media { grid-column: 1 / span 5; position: relative; }
+  .about__media::after {
+    content: ''; position: absolute; inset: auto -1.5rem -1.5rem auto; width: 55%; height: 45%;
+    border-right: 1px solid var(--sage); border-bottom: 1px solid var(--sage); pointer-events: none;
+  }
+  .about__photo { aspect-ratio: 3 / 4; }
+  .about__photo :global(img) { object-position: 50% 18%; }
+  .about__content { grid-column: 7 / span 6; }
+  .about__content .h2 { margin-top: 1.4rem; }
+  .about__content em { color: var(--plum-mid); }
+  .about__text { margin-top: 1.75rem; display: grid; gap: 1.1rem; }
+  .about__text p:not(.lead) { color: var(--text-soft); max-width: 36em; }
+  .about__facts { margin: 2.5rem 0 0; border-top: 1px solid var(--line); }
+  .about__facts div { display: grid; grid-template-columns: 9rem 1fr; gap: 1rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+  .about__facts dt { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--plum-mid); padding-top: 0.2rem; }
+  .about__facts dd { margin: 0; }
+  .about__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2rem; margin-top: 2.5rem; }
+
+  /* ---------- 6. Atendimento ---------- */
+  .care__head { max-width: 44rem; }
+  .care__head .h2 { margin-top: 1.4rem; }
+  .care__head em { color: var(--plum-mid); }
+  .care__grid {
+    display: grid; grid-template-columns: 1fr 1fr; margin-top: clamp(3rem, 6vw, 4.5rem);
+    border-top: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong);
+  }
+  .care__item { padding: clamp(2rem, 4vw, 3.25rem) clamp(1.5rem, 4vw, 3.5rem) clamp(2rem, 4vw, 3.25rem) 0; }
+  .care__item + .care__item { border-left: 1px solid var(--line-strong); padding-left: clamp(1.5rem, 4vw, 3.5rem); padding-right: 0; }
+  .care__num { display: block; font-family: var(--serif); font-style: italic; color: var(--plum-mid); font-size: 1.1rem; margin-bottom: 1.5rem; }
+  .care__item .h3 { margin-bottom: 0.75rem; font-size: clamp(1.6rem, 2.6vw, 2.2rem); }
+  .care__list { margin-top: 1.75rem; display: grid; gap: 0.75rem; }
+  .care__list li { position: relative; padding-left: 1.4rem; }
+  .care__list li::before { content: ''; position: absolute; left: 0; top: 0.68em; width: 0.45rem; height: 0.45rem; border-radius: 50%; border: 1px solid var(--plum-mid); }
+  .care__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem 3rem; margin-top: 2.5rem; }
+  .care__foot p { max-width: 38em; font-size: 0.98rem; }
+
+  /* ---------- 7. Acolhimento ---------- */
+  .welcome { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); background: var(--white); }
+  .welcome__media { position: relative; min-height: clamp(32rem, 52vw, 48rem); }
+  .welcome__photo { position: absolute; inset: 0; }
+  .welcome__photo :global(img) { object-position: 50% 30%; }
+  .welcome__content {
+    align-self: center;
+    padding: var(--section-y) max(var(--gutter), calc((100vw - var(--max)) / 2)) var(--section-y) clamp(2.5rem, 7vw, 7rem);
+  }
+  .welcome__content .h2 { margin-top: 1.4rem; max-width: 12em; }
+  .welcome__content em { color: var(--plum-mid); }
+  .welcome__text { margin-top: 2rem; display: grid; gap: 1.1rem; max-width: 32em; color: var(--text-soft); font-size: 1.1rem; }
+
+  /* ---------- 8. FAQ ---------- */
+  .faq__grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 2rem; align-items: start; }
+  .faq__head { grid-column: 1 / span 4; position: sticky; top: calc(var(--header-h) + 2rem); }
+  .faq__head .h2 { margin-top: 1.4rem; font-size: clamp(2rem, 3.6vw, 3rem); }
+  .faq__head em { color: var(--plum-mid); }
+  .faq__aside { margin-top: 1.5rem; }
+  .faq__aside a { color: var(--plum); font-weight: 550; }
+  .faq__list { grid-column: 6 / span 7; border-top: 1px solid var(--line-strong); }
+  .faq__item { border-bottom: 1px solid var(--line-strong); }
+  .faq__item summary {
+    display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;
+    padding: 1.6rem 0; cursor: pointer; list-style: none;
+    font-family: var(--serif); font-size: clamp(1.2rem, 1.8vw, 1.45rem); line-height: 1.3; color: var(--plum);
+    font-variation-settings: 'opsz' 24; transition: color 0.3s var(--ease);
+  }
+  .faq__item summary::-webkit-details-marker { display: none; }
+  .faq__item summary:hover { color: var(--plum-mid); }
+  .faq__icon { position: relative; flex: none; width: 2.25rem; height: 2.25rem; border: 1px solid var(--line-strong); border-radius: 50%; transition: background-color 0.3s var(--ease), border-color 0.3s var(--ease); }
+  .faq__icon::before, .faq__icon::after {
+    content: ''; position: absolute; left: 50%; top: 50%; width: 0.75rem; height: 1px; background: var(--plum);
+    transform: translate(-50%, -50%); transition: transform 0.4s var(--ease-out), background-color 0.3s var(--ease);
+  }
+  .faq__icon::after { transform: translate(-50%, -50%) rotate(90deg); }
+  .faq__item[open] .faq__icon { background: var(--plum); border-color: var(--plum); }
+  .faq__item[open] .faq__icon::before, .faq__item[open] .faq__icon::after { background: var(--ivory); }
+  .faq__item[open] .faq__icon::after { transform: translate(-50%, -50%) rotate(0deg); }
+  .faq__answer { padding: 0 3.5rem 1.75rem 0; color: var(--text-soft); max-width: 42em; }
+
+  /* ---------- 9. CTA final ---------- */
+  .final { overflow: hidden; text-align: center; padding-block: clamp(6rem, 13vw, 11rem); }
+  :global(.final__arc) { position: absolute; width: clamp(40rem, 80vw, 68rem); left: 50%; top: 50%; transform: translate(-50%, -50%); opacity: 0.22; pointer-events: none; }
+  .final__inner { position: relative; display: flex; flex-direction: column; align-items: center; }
+  .final__title { margin-top: 1.6rem; max-width: 13em; font-size: clamp(2.5rem, 5.6vw, 4.8rem); }
+  .final__title em { color: var(--sage); }
+  .final__lead { margin-top: 1.75rem; max-width: 32em; }
+  .final__btn { margin-top: 2.75rem; min-height: 3.6rem; padding-inline: 2rem; font-size: 1rem; }
+  .final__btn:hover { color: var(--plum); }
+  .final__info {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 1.25rem clamp(2rem, 5vw, 4rem); margin-top: clamp(3.5rem, 7vw, 5rem);
+    padding-top: 2rem; border-top: 1px solid rgba(247, 245, 240, 0.2); font-size: 0.98rem;
+  }
+  .final__info li { display: flex; flex-direction: column; gap: 0.3rem; }
+  .final__info span { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); }
+  .final__info a { color: var(--ivory); text-decoration: none; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; transition: background-size 0.45s var(--ease-out); }
+  .final__info a:hover { background-size: 100% 1px; }
+
+  /* ---------- Responsivo ---------- */
+  @media (max-width: 1100px) {
+    .ident__head, .areas__figure, .faq__head { grid-column: 1 / span 5; }
+    .ident__body, .areas__content { grid-column: 6 / span 7; }
+    .faq__list { grid-column: 6 / span 7; }
+    .method__head { grid-column: 1 / span 7; }
+    .method__photo { grid-column: 8 / span 5; }
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; min-height: 0; }
+    .hero__text { padding: calc(var(--header-h) + 2.25rem) var(--gutter) 2.75rem; }
+    .hero__title { max-width: 11em; }
+    .hero__sign { display: none; }
+    .hero__media { min-height: 0; }
+    .hero__photo { position: relative; inset: auto; aspect-ratio: 4 / 5; }
+    :global(.hero__arc) { display: none; }
+
+    .ident__grid, .areas__grid, .about__grid, .faq__grid, .method__top { grid-template-columns: 1fr; gap: 0; }
+    .ident__head, .ident__body, .areas__figure, .areas__content, .about__media, .about__content,
+    .faq__head, .faq__list, .method__head, .method__photo { grid-column: 1 / -1; }
+    .ident__body { margin-top: 2rem; }
+    .areas__figure { position: relative; top: 0; margin-bottom: 2.5rem; }
+    .areas__photo { aspect-ratio: 4 / 4.4; }
+    .method__photo { margin-top: 2.5rem; aspect-ratio: 4 / 4.4; }
+    .method__steps { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about__media { margin: 0 1.5rem 3.5rem 0; }
+    .about__photo { aspect-ratio: 4 / 4.6; }
+    .care__grid { grid-template-columns: 1fr; }
+    .care__item, .care__item + .care__item { padding: 2.25rem 0; border-left: 0; }
+    .care__item + .care__item { border-top: 1px solid var(--line-strong); }
+    .care__foot .btn { width: 100%; }
+    .welcome { grid-template-columns: 1fr; }
+    .welcome__media { min-height: 0; aspect-ratio: 4 / 4.2; }
+    .welcome__content { padding: 4rem var(--gutter) var(--section-y); }
+    .faq__head { position: relative; top: 0; margin-bottom: 2.5rem; }
+    .faq__answer { padding-right: 0; }
+  }
+
+  @media (max-width: 560px) {
+    .hero__actions { flex-direction: column; align-items: stretch; }
+    .hero__actions .btn { width: 100%; }
+    .hero__actions .link-arrow { align-self: center; }
+    .hero__sign { flex-wrap: wrap; gap: 0.5rem 1rem; }
+    .areas__item { grid-template-columns: 2.5rem 1fr; padding: 1.6rem 0; }
+    .areas__cta .btn, .about__actions .btn { width: 100%; }
+    .about__facts div { grid-template-columns: 1fr; gap: 0.3rem; }
+    .final__btn { width: 100%; }
+    .final__info { flex-direction: column; align-items: center; }
+  }
+</style>

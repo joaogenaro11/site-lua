@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import Arc from '../components/Arc.astro';
+---
+<Base title="Página não encontrada | Luana Genaro" description="A página procurada não foi encontrada." path="/404" noindex>
+  <section class="nf">
+    <Arc class="nf__arc" />
+    <div class="container nf__inner">
+      <p class="eyebrow">Erro 404</p>
+      <h1 class="display">Esta página <em class="serif-italic">não existe.</em></h1>
+      <p class="lead">O endereço pode ter mudado. Volte para a página inicial e continue navegando.</p>
+      <a class="btn" href="/">Ir para a página inicial</a>
+    </div>
+  </section>
+</Base>
+<style>
+  .nf { position: relative; overflow: hidden; background: var(--ivory); min-height: 80svh; display: flex; align-items: center; padding-top: var(--header-h); }
+  :global(.nf__arc) { position: absolute; width: 36rem; right: -10rem; top: 50%; transform: translateY(-50%); opacity: 0.5; }
+  .nf__inner { position: relative; display: grid; gap: 1.5rem; justify-items: start; }
+  .nf em { color: var(--plum-mid); }
+</style>
