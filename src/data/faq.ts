@@ -10,7 +10,7 @@ export const faq = [
   },
   {
     q: 'Você atende mulheres na menopausa?',
-    a: 'Sim. A saúde da mulher acima dos 40 anos — na perimenopausa, na menopausa e na pós-menopausa — é um dos focos principais do trabalho. Outros públicos também são atendidos, conforme as áreas de atuação.',
+    a: 'Sim. A saúde da mulher acima dos 40 anos, na perimenopausa, na menopausa e na pós-menopausa, é um dos focos principais do trabalho. Outros públicos também são atendidos, conforme as áreas de atuação.',
   },
   {
     q: 'O atendimento é presencial?',

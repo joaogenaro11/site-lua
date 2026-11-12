@@ -9,11 +9,11 @@ import { faq } from '../data/faq';
 
 import fotoHero from '../assets/fotos/luana-genaro-retrato-roxo.jpg';
 import fotoCozinha from '../assets/fotos/luana-genaro-cozinha.jpg';
-import fotoConsulta from '../assets/fotos/luana-genaro-consulta-cha.jpg';
+import fotoConsulta from '../assets/fotos/luana-genaro-consulta-notebook.jpg';
 import fotoJaleco from '../assets/fotos/luana-genaro-jaleco.jpg';
-import fotoAcolhimento from '../assets/fotos/luana-genaro-escritorio.jpg';
+import fotoAcolhimento from '../assets/fotos/luana-genaro-consulta-cha.jpg';
 
-const title = 'Luana Genaro | Nutricionista em Brasília — Nutrição de Precisão e Saúde';
+const title = 'Luana Genaro | Nutricionista em Brasília · Nutrição de Precisão e Saúde';
 const description =
   'Nutricionista no Lago Sul, Brasília (DF). Nutrição de precisão com avaliação individualizada, atenção à saúde da mulher e à menopausa, composição corporal, saúde intestinal e metabólica.';
 
@@ -36,7 +36,7 @@ const areas = [
   },
   {
     t: 'Saúde intestinal e microbiota',
-    d: 'O funcionamento intestinal e os desconfortos digestivos tratados como parte central — e não secundária — do cuidado nutricional.',
+    d: 'O funcionamento intestinal e os desconfortos digestivos tratados como parte central do cuidado nutricional, e não como algo secundário.',
   },
   {
     t: 'Saúde metabólica',
@@ -73,7 +73,7 @@ const jsonLd = {
       '@type': 'WebSite',
       '@id': `${site.url}/#website`,
       url: `${site.url}/`,
-      name: 'Luana Genaro — Nutrição de Precisão e Saúde',
+      name: 'Luana Genaro · Nutrição de Precisão e Saúde',
       inLanguage: 'pt-BR',
     },
     {
@@ -96,7 +96,7 @@ const jsonLd = {
     {
       '@type': 'MedicalBusiness',
       '@id': `${site.url}/#consultorio`,
-      name: 'Luana Genaro — Nutrição de Precisão e Saúde',
+      name: 'Luana Genaro · Nutrição de Precisão e Saúde',
       url: `${site.url}/`,
       image: `${site.url}/og-image.jpg`,
       logo: `${site.url}/icon-512.png`,
@@ -194,7 +194,7 @@ const jsonLd = {
       <div class="ident__body">
         <p class="lead" data-reveal>
           Ao longo da vida, alterações no metabolismo, na composição corporal, na energia, no sono e no
-          funcionamento intestinal podem pedir uma avaliação mais individualizada — e não mais uma regra
+          funcionamento intestinal podem pedir uma avaliação mais individualizada, e não mais uma regra
           genérica.
         </p>
         <ul class="ident__list" aria-label="Situações comuns">
@@ -258,7 +258,7 @@ const jsonLd = {
             <p class="areas__complement-label">Complementar à estratégia</p>
             <p>
               <strong>Fitoterapia e suplementação individualizada.</strong> Quando indicadas, entram como parte
-              criteriosa do plano nutricional — sempre a partir da avaliação, nunca como receita pronta.
+              criteriosa do plano nutricional, sempre a partir da avaliação e nunca como receita pronta.
             </p>
           </div>
 
@@ -290,7 +290,7 @@ const jsonLd = {
         <div class="photo method__photo" data-reveal="photo">
           <Picture
             src={fotoConsulta}
-            alt="Luana Genaro conversando e sorrindo com uma paciente durante a consulta, com xícaras de chá sobre a mesa."
+            alt="Luana Genaro e uma paciente sorrindo diante de um notebook durante a consulta, com um caderno de anotações sobre a mesa."
             formats={['webp']}
             widths={[420, 640, 900]}
             sizes="(max-width: 900px) 100vw, 42vw"
@@ -344,7 +344,7 @@ const jsonLd = {
           </p>
           <p>
             Em seu trabalho, integra conhecimento científico, avaliação nutricional, contexto metabólico e uma
-            escuta atenta — porque sintomas, exames e hábitos só fazem sentido quando lidos em conjunto. O
+            escuta atenta. Afinal, sintomas, exames e hábitos só fazem sentido quando lidos em conjunto. O
             resultado é um cuidado próximo, claro e construído para a sua realidade.
           </p>
         </div>
@@ -429,7 +429,7 @@ const jsonLd = {
       <div class="photo welcome__photo" data-reveal="fade">
         <Picture
           src={fotoAcolhimento}
-          alt="Luana Genaro sorrindo, sentada à mesa diante de um notebook, em ambiente acolhedor."
+          alt="Luana Genaro conversando e sorrindo com uma paciente, segurando uma xícara de chá, em ambiente acolhedor."
           formats={['webp']}
           widths={[480, 720, 960, 1333]}
           sizes="(max-width: 900px) 100vw, 50vw"
@@ -449,7 +449,7 @@ const jsonLd = {
           Cada orientação começa pela escuta. O objetivo não é impor regras rígidas, mas construir autonomia:
           escolhas que respeitam a sua rotina, a sua história e o seu momento de vida.
         </p>
-        <p>Um cuidado que não se resume ao peso — e que acompanha você de perto, em cada etapa.</p>
+        <p>Um cuidado que não se resume ao peso e que acompanha você de perto, em cada etapa.</p>
       </div>
     </div>
   </section>
@@ -593,7 +593,7 @@ const jsonLd = {
   .method__head em { color: var(--sage); }
   .method__head .lead { margin-top: 1.75rem; }
   .method__photo { grid-column: 8 / span 5; aspect-ratio: 4 / 5; }
-  .method__photo :global(img) { object-position: 45% 30%; }
+  .method__photo :global(img) { object-position: 50% 62%; }
   .method__steps {
     display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(2rem, 4vw, 4rem);
     margin-top: clamp(4rem, 8vw, 6.5rem); counter-reset: step;
@@ -651,7 +651,7 @@ const jsonLd = {
   .welcome { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); background: var(--white); }
   .welcome__media { position: relative; min-height: clamp(32rem, 52vw, 48rem); }
   .welcome__photo { position: absolute; inset: 0; }
-  .welcome__photo :global(img) { object-position: 50% 30%; }
+  .welcome__photo :global(img) { object-position: 55% 42%; }
   .welcome__content {
     align-self: center;
     padding: var(--section-y) max(var(--gutter), calc((100vw - var(--max)) / 2)) var(--section-y) clamp(2.5rem, 7vw, 7rem);
